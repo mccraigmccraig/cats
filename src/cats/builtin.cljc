@@ -171,7 +171,7 @@
           (p/-foldl ctx f (f z x) xs))))
 
     p/Traversable
-    (traverse [ctx f tv]
+    (-traverse [ctx f tv]
       (let [as (map f tv)]
         (p/-foldr ctx
                   (fn [a acc]

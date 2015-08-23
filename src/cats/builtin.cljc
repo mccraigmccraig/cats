@@ -103,7 +103,18 @@
              xs (rest xs)]
          (if (nil? x)
            z
-           (p/-foldl ctx f (f z x) xs)))))))
+           (p/-foldl ctx f (f z x) xs)))))
+
+    p/Traversable
+    (-traverse [ctx f tv]
+      (let [as (p/-fmap ctx f tv)]
+        (p/-foldr ctx
+                  (fn [a acc]
+                    (m/alet [x a
+                             xs acc]
+                      (cons x xs)))
+                  (m/pure (lazy-seq []))
+                  as)))))
 
 (extend-type #?(:clj  clojure.lang.LazySeq
                 :cljs cljs.core.LazySeq)
@@ -172,7 +183,7 @@
 
     p/Traversable
     (-traverse [ctx f tv]
-      (let [as (map f tv)]
+      (let [as (p/-fmap ctx f tv)]
         (p/-foldl ctx
                   (fn [acc a]
                     (m/alet [x a

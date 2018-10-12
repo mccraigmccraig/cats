@@ -1,4 +1,4 @@
-(defproject mccraigmccraig/cats "2.2.0.100"
+(defproject mccraigmccraig/cats "2.2.0.101"
   :description "Category Theory abstractions for Clojure"
   :url         "https://github.com/funcool/cats"
   :license {:name "BSD (2 Clause)"
